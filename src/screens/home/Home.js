@@ -8,7 +8,7 @@ const Home = () => {
     const initState = async () => {
         await cookies.set("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlczEyMzRAZ21haWwuY29tIiwiaWF0IjoxNjY5NzA1NTQ1fQ.I_tZrYe9bPOj7g5rcqZ82wQh695HBiEXszpUVDze640")
 
-        await http.post("category/get-category").then(res => {
+        await http.post("/get-category").then(res => {
             console.log(res.data);
         }).catch(e => {
             console.log(e);
