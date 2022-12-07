@@ -15,6 +15,8 @@ const NavbarAdmin = () => {
             if (res.data.success === true) {
                 setDataProfile(res.data.data)
             }
+        }).catch(e => {
+            console.log(e);
         })
     }
 

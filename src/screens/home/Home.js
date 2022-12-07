@@ -10,6 +10,8 @@ const Home = () => {
 
         await http.post("category/get-category").then(res => {
             console.log(res.data);
+        }).catch(e => {
+            console.log(e);
         })
     }
 
