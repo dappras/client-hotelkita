@@ -6,6 +6,7 @@ const cookies = new Cookies()
 const http = axios.create({
     baseURL: 'http://103.226.139.23:3000/api',
     headers: {
+        "Content-Type": "application/json",
         "auth-token": cookies.get("token"),
     },
 })
