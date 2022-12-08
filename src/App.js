@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import './App.css';
-import Dashboard from './screens/dashboard';
+import Dashboard from './screens/admin/dashboardHome';
+import MyHotel from './screens/admin/myHotel';
+import AddHotel from './screens/admin/myHotel/addHotel';
 import Home from './screens/home/Home';
-import NavbarAdmin from './component/admin/navbarAdmin';
-import SidebarAdmin from './component/admin/sidebar';
 
 function App() {
   return (
@@ -16,10 +15,23 @@ function App() {
       <div className="dashboard">
         <Switch>
           <div className='wrapper'>
-            <Route exact path="/dashboard">
-              <NavbarAdmin />
-              <SidebarAdmin />
-              <Dashboard />
+            <Route exact path="/dashboard" component={Dashboard}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="my-hotel">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/dashboard/my-hotel" component={MyHotel}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="add-hotel">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/dashboard/my-hotel/add-hotel" component={AddHotel}>
             </Route>
           </div>
         </Switch>

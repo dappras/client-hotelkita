@@ -2,29 +2,7 @@ import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
 import http from "../../utils/http";
 
-const NavbarAdmin = () => {
-    const [dataProfile, setDataProfile] = useState()
-
-    const cookies = new Cookies()
-
-    const initState = async () => {
-        await cookies.set("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhZmZhLm5hdWZhbkBnbWFpbC5jb20iLCJpYXQiOjE2NzAzMDc2OTB9.4a6kmfzRarGNd4K1jwOWMg3Lp4enCEtO1Mo81axdZI4")
-
-        await http.post('/get-profile').then((res) => {
-            console.log(res.data);
-            if (res.data.success === true) {
-                setDataProfile(res.data.data)
-            }
-        }).catch(e => {
-            console.log(e);
-        })
-    }
-
-    useEffect(() => {
-        initState()
-    }, []) 
-
-
+const NavbarAdmin = ({profile}) => {
     return (
         <div>
             {/* Navbar */}
@@ -44,7 +22,7 @@ const NavbarAdmin = () => {
                 <li className="nav-item dropdown">
                     <a className="nav-link mb-3" data-toggle="dropdown" href="#">
                         <div style={{ width: 50, height:50 }}>
-                            {dataProfile && <img src={ dataProfile.imageUrl } className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
+                            {profile && <img src={ profile.imageUrl } className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right mt-2">
