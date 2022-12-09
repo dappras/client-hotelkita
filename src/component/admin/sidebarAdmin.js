@@ -52,37 +52,51 @@ const SidebarAdmin = ({profile}) => {
                             </a>
                         </li>
                         <li className="nav-header mt-3">FEATURE</li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link">
-                            <i className="nav-icon fas fa-building" />
-                            <p>
-                                Hotel
-                                <i className="fas fa-angle-left right" />
-                            </p>
-                            </a>
-                            <ul className="nav nav-treeview">
+                        {profile && profile.role === 0 && (
                             <li className="nav-item">
-                                <a href="/dashboard/my-hotel" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>My Hotel</p>
+                                <a href="/dashboard/hotel" className="nav-link">
+                                    <i className="nav-icon fas fa-building" />
+                                    <p>
+                                        Hotel
+                                    </p>
                                 </a>
                             </li>
+                        )}
+                        {profile && profile.role === 1 && (
                             <li className="nav-item">
-                                <a href="pages/forms/advanced.html" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>Booking</p>
-                                </a>
-                            </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item">
-                            <a href="/dashboard/profile" className="nav-link">
-                                <i className="nav-icon fas fa-user" />
+                                <a href="#" className="nav-link">
+                                <i className="nav-icon fas fa-building" />
                                 <p>
-                                    Profile
+                                    Hotel
+                                    <i className="fas fa-angle-left right" />
                                 </p>
-                            </a>
-                        </li>
+                                </a>
+                                <ul className="nav nav-treeview">
+                                <li className="nav-item">
+                                    <a href="/dashboard/my-hotel" className="nav-link">
+                                    <i className="far fa-circle nav-icon" />
+                                    <p>My Hotel</p>
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a href="/dashboard/booking" className="nav-link">
+                                    <i className="far fa-circle nav-icon" />
+                                    <p>Booking</p>
+                                    </a>
+                                </li>
+                                </ul>
+                            </li>
+                        )}
+                        {profile && profile.role === 1 && (
+                            <li className="nav-item">
+                                <a href="/dashboard/profile" className="nav-link">
+                                    <i className="nav-icon fas fa-user" />
+                                    <p>
+                                        Profile
+                                    </p>
+                                </a>
+                            </li>
+                        )}
                     </ul>
                 </nav>
                 {/* /.sidebar-menu */}

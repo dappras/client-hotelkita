@@ -6,7 +6,7 @@ const Home = () => {
     const cookies = new Cookies()
 
     const initState = async () => {
-        await cookies.set("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhZmZhLm5hdWZhbkBnbWFpbC5jb20iLCJpYXQiOjE2NzAzMDc2OTB9.4a6kmfzRarGNd4K1jwOWMg3Lp4enCEtO1Mo81axdZI4", {path: '/'})
+        await cookies.set("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY3MDYwNzIxOX0.V5YhmSiaaaEFxijfKwrlKyzL1B8GLxRVqfOo92crPKY", {path: '/'})
 
         await http.post("/get-category").then(res => {
             console.log(res.data);
