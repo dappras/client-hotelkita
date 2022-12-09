@@ -67,7 +67,7 @@ const ConfirmHotel = () => {
 
             <div className="content-wrapper row justify-content-center">
                 <div className="col-lg-7 p-4">
-                    <h2>Detail Booking</h2>
+                    <h2>Detail Hotel</h2>
 
                     <div className="elevation-1 mt-5 p-4" style={{ backgroundColor: 'white', borderRadius: 12 }}>
                         {detailHotel && (
