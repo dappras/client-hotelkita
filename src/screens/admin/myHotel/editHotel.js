@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { render } from "react-dom";
 import { useHistory, useParams } from "react-router-dom";
 import NavbarAdmin from "../../../component/admin/navbarAdmin";
 import SidebarAdmin from "../../../component/admin/sidebarAdmin";
@@ -202,14 +201,14 @@ const EditHotel = () => {
             <NavbarAdmin profile={dataProfile} />
             <SidebarAdmin profile={dataProfile} />
 
+
+            <div className="content-wrapper row justify-content-center">
             {formFull && (
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Please fill the form!!</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setFormFull(false)}></button>
                     </div>
                 )}
-
-            <div className="content-wrapper row justify-content-center">
                 <div className="col-lg-6 p-4">
                     <h2>Edit Hotel</h2>
 

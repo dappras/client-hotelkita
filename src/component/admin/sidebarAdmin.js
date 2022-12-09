@@ -17,7 +17,8 @@ const SidebarAdmin = ({profile}) => {
                 {/* Sidebar user panel (optional) */}
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div style={{ width: 35, height:35 }}>
-                        {profile && <img src={profile.imageUrl} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 100 }} alt="User Image" />}
+                        {profile && profile.imageUrl === undefined && <img src={require('./profilePicture.jpg')} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 100 }} alt="User Image" />}
+                        {profile && profile.imageUrl && <img src={profile.imageUrl} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 100 }} alt="User Image" />}
                     </div>
                     <div className="info">
                     {profile && 
@@ -69,51 +70,18 @@ const SidebarAdmin = ({profile}) => {
                             <li className="nav-item">
                                 <a href="pages/forms/advanced.html" className="nav-link">
                                 <i className="far fa-circle nav-icon" />
-                                <p>Advanced Elements</p>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="pages/forms/editors.html" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>Editors</p>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="pages/forms/validation.html" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>Validation</p>
+                                <p>Booking</p>
                                 </a>
                             </li>
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a href="#" className="nav-link">
-                            <i className="nav-icon fas fa-table" />
-                            <p>
-                                Tables
-                                <i className="fas fa-angle-left right" />
-                            </p>
+                            <a href="/dashboard/profile" className="nav-link">
+                                <i className="nav-icon fas fa-user" />
+                                <p>
+                                    Profile
+                                </p>
                             </a>
-                            <ul className="nav nav-treeview">
-                            <li className="nav-item">
-                                <a href="pages/tables/simple.html" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>Simple Tables</p>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="pages/tables/data.html" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>DataTables</p>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="pages/tables/jsgrid.html" className="nav-link">
-                                <i className="far fa-circle nav-icon" />
-                                <p>jsGrid</p>
-                                </a>
-                            </li>
-                            </ul>
                         </li>
                     </ul>
                 </nav>

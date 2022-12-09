@@ -3,6 +3,7 @@ import Dashboard from './screens/admin/dashboardHome';
 import MyHotel from './screens/admin/myHotel';
 import AddHotel from './screens/admin/myHotel/addHotel';
 import EditHotel from './screens/admin/myHotel/editHotel';
+import Profile from './screens/admin/profile';
 import Home from './screens/home/Home';
 
 function App() {
@@ -41,6 +42,14 @@ function App() {
         <Switch>
           <div className='wrapper'>
             <Route exact path="/dashboard/my-hotel/edit-hotel/:id" component={EditHotel}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="profile">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/dashboard/profile" component={Profile}>
             </Route>
           </div>
         </Switch>

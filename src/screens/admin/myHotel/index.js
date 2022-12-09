@@ -70,48 +70,57 @@ const MyHotel = () => {
                     <section className="content">
                         <div className="container-fluid">
                         <div className="row">
-                            <div className="col-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h3 className="card-title mt-1">
-                                        <a href="/dashboard/my-hotel/add-hotel">
-                                            <i className="fas fa-plus bg-primary p-2" style={{ borderRadius: 6 }}></i>
-                                        </a>
-                                    </h3>
-                                </div>
-                                {/* /.card-header */}
-                                <div className="card-body">
-                                <table id="example2" className="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Room</th>
-                                        <th>Address</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {dataMyHotel && dataMyHotel.map((item) => (
+                            <div className="col-lg-12">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h3 className="card-title mt-1">
+                                            <a href="/dashboard/my-hotel/add-hotel">
+                                                <i className="fas fa-plus bg-primary p-2" style={{ borderRadius: 6 }}></i>
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    {/* /.card-header */}
+                                    <div className="card-body">
+                                    <table id="example2" className="table table-bordered table-hover">
+                                        <thead>
                                         <tr>
-                                            <td>{item.name}</td>
-                                            <td>{item.price}</td>
-                                            <td>{item.room}</td>
-                                            <td>{item.address}</td>
-                                            <td>    
-                                                <Link to={'/dashboard/my-hotel/edit-hotel/' + item._id}>
-                                                    <i className="fas fa-edit bg-warning p-2 mr-2" style={{ borderRadius: 6 }} />
-                                                </Link>
-                                                <i className="fas fa-trash bg-danger p-2" onClick={() => deleteHotel(item._id)} style={{ borderRadius: 6 }} />    
-                                            </td>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Room</th>
+                                            <th>Address</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {dataMyHotel && dataMyHotel.map((item) => (
+                                            <tr>
+                                                <td>{item.name}</td>
+                                                <td>{item.price}</td>
+                                                <td>{item.room}</td>
+                                                <td>{item.address}</td>
+                                                <td>
+                                                    {item.status === 0 && (
+                                                        <span style={{ color: 'red' }}>Not Accepted</span>
+                                                    )}
+                                                    {item.status === 1 && (
+                                                        <span style={{ color: 'green' }}>Accepted</span>
+                                                    )}
+                                                </td>
+                                                <td>    
+                                                    <Link to={'/dashboard/my-hotel/edit-hotel/' + item._id}>
+                                                        <i className="fas fa-edit bg-warning p-2 mr-2" style={{ borderRadius: 6 }} />
+                                                    </Link>
+                                                    <i className="fas fa-trash bg-danger p-2" onClick={() => deleteHotel(item._id)} style={{ borderRadius: 6 }} />    
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                    {/* /.card-body */}
                                 </div>
-                                {/* /.card-body */}
-                            </div>
-                            {/* /.card */}
+                                {/* /.card */}
                             </div>
                             {/* /.col */}
                         </div>

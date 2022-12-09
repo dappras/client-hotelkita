@@ -22,7 +22,8 @@ const NavbarAdmin = ({profile}) => {
                 <li className="nav-item dropdown">
                     <a className="nav-link mb-3" data-toggle="dropdown" href="#">
                         <div style={{ width: 50, height:50 }}>
-                            {profile && <img src={ profile.imageUrl } className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
+                            {profile && profile.imageUrl === undefined && <img src={require('./profilePicture.jpg')} className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
+                            {profile && profile.imageUrl && <img src={ profile.imageUrl } className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right mt-2">
