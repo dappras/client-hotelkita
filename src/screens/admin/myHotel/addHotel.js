@@ -156,7 +156,7 @@ const AddHotel = () => {
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setFormFull(false)}></button>
                     </div>
                 )}
-                <div className="col-6 p-4">
+                <div className="col-lg-6 p-4">
                     <h2>Add Hotel</h2>
 
                     <div className="elevation-1 mt-5 p-4" style={{ backgroundColor: 'white', borderRadius: 12 }}>
