@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import NavbarAdmin from "../../../component/admin/navbarAdmin";
 import SidebarAdmin from "../../../component/admin/sidebarAdmin";
 import http from "../../../utils/http";
+import { Link } from "react-router-dom";
 
 const MyHotel = () => {
     const [dataProfile, setDataProfile] = useState()
@@ -30,6 +31,23 @@ const MyHotel = () => {
     useEffect(() => {
         initState()
     }, []) 
+
+    const deleteHotel = async (id) => {
+        const body = {
+            id: id
+        }
+
+        await http.post('/delete-hotel', body).then((res) => {
+            if (res.data.success) {
+                window.location.reload()
+            } else {
+                console.log(res.data);
+                console.log("failed fetching data");
+            }
+        }).catch((e) => {
+            console.log(e);
+        })
+    }
 
     return (
         <div>
@@ -81,8 +99,10 @@ const MyHotel = () => {
                                             <td>{item.room}</td>
                                             <td>{item.address}</td>
                                             <td>    
-                                                <i className="fas fa-edit bg-warning p-2 mr-2" style={{ borderRadius: 6 }} />
-                                                <i className="fas fa-trash bg-danger p-2" style={{ borderRadius: 6 }} />    
+                                                <Link to={'/dashboard/my-hotel/edit-hotel/' + item._id}>
+                                                    <i className="fas fa-edit bg-warning p-2 mr-2" style={{ borderRadius: 6 }} />
+                                                </Link>
+                                                <i className="fas fa-trash bg-danger p-2" onClick={() => deleteHotel(item._id)} style={{ borderRadius: 6 }} />    
                                             </td>
                                         </tr>
                                     ))}

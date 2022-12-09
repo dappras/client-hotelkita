@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from "react";
+import { render } from "react-dom";
+import { useHistory, useParams } from "react-router-dom";
 import NavbarAdmin from "../../../component/admin/navbarAdmin";
 import SidebarAdmin from "../../../component/admin/sidebarAdmin";
 import http from "../../../utils/http";
-import {useHistory} from 'react-router-dom'
 
-const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
-
-const AddHotel = () => {
+const EditHotel = () => {
+    const {id} = useParams()
     const history =  useHistory()
 
     const [dataProfile, setDataProfile] = useState()
     const [category, setCategory] = useState()
+    const [detailHotel, setDetailHotel] = useState()
 
     const [name, setName] = useState()
     const [room, setRoom] = useState()
@@ -19,6 +20,8 @@ const AddHotel = () => {
     const [address, setAddress] = useState()
     const [categoryId, setCategoryId] = useState()
     const [urlMaps, setUrlMaps] = useState()
+    const [imageExisting, setImageExisting] = useState()
+    const [imageRemoved, setImageRemoved] = useState()
 
     const [updateImage, setUpdateImage] = useState(true)
     const [formFull, setFormFull] = useState(false)
@@ -43,11 +46,35 @@ const AddHotel = () => {
         }).catch(e => {
             console.log(e);
         })
+
+        const bodyDetailHotel = {
+            id: id
+        }
+
+        await http.post('/get-detail-hotel', bodyDetailHotel).then((res) => {
+            if (res.data.success) {
+                setName(res.data.data.name)
+                setRoom(res.data.data.room)
+                setDescription(res.data.data.description)
+                setPrice(res.data.data.price)
+                setAddress(res.data.data.address)
+                setCategoryId(res.data.data.categoryId)
+                setUrlMaps(res.data.data.urlMaps)
+                setImageExisting(res.data.data.image)
+                setDetailHotel(res.data.data)
+                setImageRemoved([])
+                console.log(res.data.data);
+            } else {
+                console.log('failed fetch data');
+            }
+        }).catch(e => {
+            console.log(e);
+        })
     }
 
     useEffect(() => {
         initState()
-    }, []) 
+    }, [])
 
     const [base64, setBase64] = useState()
     const [imageFile, setImageFile] = useState()
@@ -93,36 +120,24 @@ const AddHotel = () => {
 
         setImageFile(hasilFile)
         setBase64(hasilBase64)
-    
     };
 
-    const submitForm = async () => {
-        if (name===undefined || room===undefined || description===undefined || price===undefined || address===undefined || categoryId===undefined || urlMaps===undefined || base64===undefined) {
-            setFormFull(true)
-            return
-        }
+    const imageRemove = async (id) => {
+        let temp = detailHotel.image
 
-        const body = {
-            name: name,
-            address: address,
-            room: room,
-            description: description,
-            price: price,
-            urlMaps: urlMaps,
-            categoryId: categoryId,
-            image: base64
-        }
-
-        await http.post('/add-hotel', body).then(res => {
-            if (res.data.success) {
-                console.log('success');
-                history.push('/dashboard/my-hotel')
-            } else {
-                console.log('failed');
+        imageRemoved.push(id)
+        
+        for (let index = 0; index < temp.length; index++) {
+            const item = temp[index];
+            
+            if (item.id === id) {
+                temp.splice(index, 1)
             }
-        }).catch(e => {
-            console.log(e);
-        })
+        }
+
+        await setImageExisting(temp)
+        
+        await setUpdateImage(true)
     }
 
     const imageRemoveFile = async (isi) => {
@@ -144,23 +159,63 @@ const AddHotel = () => {
         await setUpdateImage(true)
     }
 
+    const submitForm = async () => {
+        if (name===undefined || room===undefined || description===undefined || price===undefined || address===undefined || categoryId===undefined || urlMaps===undefined) {
+            setFormFull(true)
+            return
+        }
+
+        const body = {
+            id: id,
+            name: name,
+            address: address,
+            room: room,
+            description: description,
+            price: price,
+            urlMaps: urlMaps,
+            categoryId: categoryId,
+            removedImage: imageRemoved
+        }
+        if (base64 !== undefined) {
+            body.image = base64
+        } else {
+            body.image = []
+        }
+
+        console.log(body);
+
+
+        await http.post('/edit-hotel', body).then(res => {
+            if (res.data.success) {
+                console.log('success');
+                history.push('/dashboard/my-hotel')
+            } else {
+                console.log('failed');
+            }
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
     return (
         <div>
             <NavbarAdmin profile={dataProfile} />
             <SidebarAdmin profile={dataProfile} />
-            {/* Content Wrapper. Contains page content */}
-            <div className="content-wrapper row justify-content-center">
-                {formFull && (
+
+            {formFull && (
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Please fill the form!!</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setFormFull(false)}></button>
                     </div>
                 )}
-                <div className="col-6 p-4">
-                    <h2>Add Hotel</h2>
+
+            <div className="content-wrapper row justify-content-center">
+                <div className="col-lg-6 p-4">
+                    <h2>Edit Hotel</h2>
 
                     <div className="elevation-1 mt-5 p-4" style={{ backgroundColor: 'white', borderRadius: 12 }}>
-                        <form>
+                        {detailHotel && (
+                            <form>
                             <div className="form-group">
                                 <label>Name</label>
                                 <input type="text" className="form-control" placeholder="Hotel Saya" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -183,7 +238,7 @@ const AddHotel = () => {
                             </div>
                             {category && <label>City</label> }
                             {category && 
-                                <select class="form-control mb-3" onChange={e => setCategoryId(e.target.value)} required>
+                                <select class="form-control mb-3" onChange={e => setCategoryId(e.target.value)} value={categoryId} required>
                                     <option hidden>Select your city</option>
                                     {category.map(isi => (
                                         <option value={isi._id}>{isi.name}</option>
@@ -196,7 +251,22 @@ const AddHotel = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlFile1">Image</label>
-                                {imageFile && updateImage && (
+                                {updateImage && (
+                                    <div className="row mb-3" >
+                                        {imageExisting.map(isi => (
+                                            <div className="col-4 mb-2">
+                                                <img src={isi.imageUrl} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 8 }} alt="tes" />
+                                                <div style={{ position: 'absolute', top: 8, right:25 }} onClick={() => {
+                                                    setUpdateImage(false)    
+                                                    imageRemove(isi.id)
+                                                }}>
+                                                    <i className="fas fa-circle-xmark" style={{ color: 'red', fontSize: 20 }}></i>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                                {imageFile && (
                                     <div className="row mb-3">
                                         {imageFile.map((isi) => (
                                             <div className="col-4 mb-2">
@@ -216,20 +286,19 @@ const AddHotel = () => {
 
                             <div className="d-flex justify-content-end mt-3">
                                 <a href="/dashboard/my-hotel">
-                                    <button type="submit" className="btn btn-secondary">Cancel</button>
+                                    <div className="btn btn-secondary">Cancel</div>
                                 </a>
                                 <div className="btn btn-primary ml-3" onClick={submitForm}>
                                     Submit
                                 </div>
-                                {/* <button type="submit" className="btn btn-primary ml-3" onSubmit={submitForm}>Submit</button> */}
                             </div>
                         </form>
+                        )}
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
 
-export default AddHotel
+export default EditHotel

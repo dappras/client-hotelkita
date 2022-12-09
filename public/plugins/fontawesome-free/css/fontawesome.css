@@ -474,6 +474,10 @@ readers do not read off random characters that represent icons */
 .fa-right-from-bracket:before {
   content: "\f2f5"; }
 
+.fa-circle-xmark:before {
+    content: "\f057";
+  }
+
 .fa-baseball-ball:before {
   content: "\f433"; }
 
