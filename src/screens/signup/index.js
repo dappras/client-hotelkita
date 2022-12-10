@@ -2,17 +2,21 @@ import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
 import Navbar from "../../component/navbar";
 import http from "../../utils/http";
-import './login.css';
+import './signup.css';
 import {useHistory} from 'react-router-dom'
 
-const Login = () => {
+const SignUp = () => {
     const cookies = new Cookies()
     const history = useHistory()
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [confirmPassword, setConfirmPassword] = useState()
+    const [fullname, setFullName] = useState()
+    const [phoneNumber, setPhoneNumber] = useState()
 
     const [formFull, setFormFull] = useState(false)
+    const [passwordSame, setPasswordSame] = useState(false)
 
     const initState = async () => {
         if (cookies.get('token') !== undefined) {
@@ -25,24 +29,31 @@ const Login = () => {
     }, [])
 
     const submitForm = async () => {
-        if (email === undefined || password === undefined) {
+        console.log(fullname);
+        console.log(email);
+        console.log(phoneNumber);
+        console.log(password);
+        console.log(confirmPassword);
+        if (email === undefined || password === undefined || fullname === undefined || phoneNumber === undefined || confirmPassword === undefined) {
             setFormFull(true)
             return
         }
 
-        const body = {
-            'email': email,
-            'password': password
+        if (password !== confirmPassword) {
+            setPasswordSame(true)
+            return
         }
 
-        await http.post('/login', body).then(async (res) => {
-            if (res.data.success) {
-                await cookies.set("token", res.data.token, {path: '/'})
-                
-                await setTimeout(() => {
-                    window.location.reload()
-                }, 2000)
+        const body = {
+            email: email,
+            name: fullname,
+            phoneNumber: phoneNumber,
+            password: password
+        }
 
+        await http.post('/register', body).then(async (res) => {
+            if (res.data.success) {
+                history.push('/login')
             } else {
                 console.log('failed fetching data');
             }
@@ -77,22 +88,37 @@ const Login = () => {
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setFormFull(false)}></button>
                                 </div>
                             )}
-                            <div style={{ fontSize: 28, fontWeight: 500, marginBottom: 24}}>Login</div>
+                            {passwordSame && (
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Password are not match!!</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setFormFull(false)}></button>
+                                </div>
+                            )}
+                            <div style={{ fontSize: 28, fontWeight: 500, marginBottom: 24}}>Sign Up</div>
+                            <div className="form-group">
+                                <input type="text" className="form-control" id="exampleInputEmail1" value={fullname}  onChange={(e) => setFullName(e.target.value)} aria-describedby="emailHelp" placeholder="Full Name" />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" className="form-control" id="exampleInputEmail1" value={phoneNumber}  onChange={(e) => setPhoneNumber(e.target.value)} aria-describedby="emailHelp" placeholder="Mobile Number" />
+                            </div>
                             <div className="form-group">
                                 <input type="email" className="form-control" id="exampleInputEmail1" value={email}  onChange={(e) => setEmail(e.target.value)} aria-describedby="emailHelp" placeholder="Enter email" />
                             </div>
                             <div className="form-group">
                                 <input type="password" className="form-control" id="exampleInputPassword1" value={password}  onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                             </div>
+                            <div className="form-group">
+                                <input type="password" className="form-control" id="exampleInputPassword1" value={confirmPassword}  onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
+                            </div>
 
                             <div className="d-flex justify-content-center mt-5">
                                 <div style={{ backgroundColor: '#01BDE1', display: 'inline-block', borderRadius: 50, paddingLeft: 80, paddingRight: 80, color: 'white', paddingTop: 12, paddingBottom: 12 }} onClick={submitForm}>
-                                    SIGN IN
+                                    SIGN UP
                                 </div>
                             </div>
 
                             <div className="d-flex justify-content-center mt-5">
-                                Don't have an account? <span className="ml-2"><a href="/signup" style={{ color: '#054574', textDecoration: 'none' }}>Sign Up</a></span>
+                                Alreade have account? <span className="ml-2"><a href="/login" style={{ color: '#054574', textDecoration: 'none' }}>Login</a></span>
                             </div>
                     </div>
                 </div>
@@ -101,4 +127,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp

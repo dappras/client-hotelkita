@@ -12,6 +12,7 @@ import EditHotel from './screens/admin/myHotel/editHotel';
 import Profile from './screens/admin/profile';
 import Home from './screens/home/Home';
 import Login from './screens/login';
+import SignUp from './screens/signup';
 
 function App() {
   return (
@@ -32,6 +33,11 @@ function App() {
       <div className="login">
         <Switch>
           <Route exact path="/login" component={Login} />
+        </Switch>
+      </div>
+      <div className="signup">
+        <Switch>
+          <Route exact path="/signup" component={SignUp} />
         </Switch>
       </div>
       <div className="my-hotel">
