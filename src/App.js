@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Booking from './screens/admin/booking';
 import ConfirmBooking from './screens/admin/booking/confirmBooking';
+import Category from './screens/admin/category';
+import AddCategory from './screens/admin/category/addCategory';
 import Dashboard from './screens/admin/dashboardHome';
 import HotelConfirm from './screens/admin/hotelConfirm';
 import ConfirmHotel from './screens/admin/hotelConfirm/confirmHotel';
@@ -78,6 +80,22 @@ function App() {
         <Switch>
           <div className='wrapper'>
             <Route exact path="/dashboard/hotel/confirm-hotel/:id" component={ConfirmHotel}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="category">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/dashboard/category-city" component={Category}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="add-category">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/dashboard/category-city/add-category" component={AddCategory}>
             </Route>
           </div>
         </Switch>

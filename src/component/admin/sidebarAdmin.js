@@ -27,7 +27,7 @@ const SidebarAdmin = ({profile}) => {
                     </div>
                 </div>
                 {/* SidebarSearch Form */}
-                <div className="form-inline">
+                {/* <div className="form-inline">
                     <div className="input-group" data-widget="sidebar-search">
                     <input className="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
                     <div className="input-group-append">
@@ -36,7 +36,7 @@ const SidebarAdmin = ({profile}) => {
                         </button>
                     </div>
                     </div>
-                </div>
+                </div> */}
                 {/* Sidebar Menu */}
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -58,6 +58,16 @@ const SidebarAdmin = ({profile}) => {
                                     <i className="nav-icon fas fa-building" />
                                     <p>
                                         Hotel
+                                    </p>
+                                </a>
+                            </li>
+                        )}
+                        {profile && profile.role === 0 && (
+                            <li className="nav-item">
+                                <a href="/dashboard/category-city" className="nav-link">
+                                    <i className="nav-icon fas fa-city" />
+                                    <p>
+                                        Category / City
                                     </p>
                                 </a>
                             </li>

@@ -203,7 +203,7 @@ const EditHotel = () => {
 
 
             <div className="content-wrapper row justify-content-center">
-                {formFull && (
+            {formFull && (
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Please fill the form!!</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setFormFull(false)}></button>
