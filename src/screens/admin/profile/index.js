@@ -2,8 +2,13 @@ import React, {useEffect, useState} from "react";
 import NavbarAdmin from "../../../component/admin/navbarAdmin";
 import SidebarAdmin from "../../../component/admin/sidebarAdmin";
 import http from "../../../utils/http";
+import { useHistory } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Profile = () => {
+    const history = useHistory()
+    const cookies = new Cookies()
+
     const [dataProfile, setDataProfile] = useState()
 
     const [name, setName] = useState()
@@ -20,6 +25,10 @@ const Profile = () => {
     const [formFull, setFormFull] = useState(false)
 
     const initState = async () => {
+        if (cookies.get('token') === undefined) {
+            history.push('/login')   
+        }
+        
         await http.post('/get-profile').then((res) => {
             if (res.data.success === true) {
                 setName(res.data.data.name)

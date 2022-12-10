@@ -3,11 +3,13 @@ import NavbarAdmin from "../../../component/admin/navbarAdmin";
 import SidebarAdmin from "../../../component/admin/sidebarAdmin";
 import http from "../../../utils/http";
 import {useHistory} from 'react-router-dom'
+import Cookies from "universal-cookie";
 
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
 const AddHotel = () => {
     const history =  useHistory()
+    const cookies = new Cookies()
 
     const [dataProfile, setDataProfile] = useState()
     const [category, setCategory] = useState()
@@ -24,6 +26,10 @@ const AddHotel = () => {
     const [formFull, setFormFull] = useState(false)
 
     const initState = async () => {
+        if (cookies.get('token') === undefined) {
+            history.push('/login')   
+        }
+
         await http.post('/get-profile').then((res) => {
             if (res.data.success === true) {
                 setDataProfile(res.data.data)

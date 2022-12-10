@@ -4,12 +4,20 @@ import NavbarAdmin from "../../../component/admin/navbarAdmin";
 import SidebarAdmin from "../../../component/admin/sidebarAdmin";
 import http from "../../../utils/http";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const HotelConfirm = () => {
     const [dataProfile, setDataProfile] = useState()
     const [hotel, setHotel] = useState()
+    const history = useHistory()
+    const cookies = new Cookies()
 
     const initState = async () => {
+        if (cookies.get('token') === undefined) {
+            history.push('/login')   
+        }
+
         await http.post('/get-profile').then((res) => {
             if (res.data.success === true) {
                 setDataProfile(res.data.data)

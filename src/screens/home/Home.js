@@ -7,13 +7,7 @@ const Home = () => {
     const cookies = new Cookies()
 
     const initState = async () => {
-        await cookies.set("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY3MDYwNzIxOX0.V5YhmSiaaaEFxijfKwrlKyzL1B8GLxRVqfOo92crPKY", {path: '/'})
-
-        await http.post("/get-category").then(res => {
-            console.log(res.data);
-        }).catch(e => {
-            console.log(e);
-        })
+        console.log(cookies.get('token'));
     }
 
     useEffect(() => {
@@ -29,9 +23,6 @@ const Home = () => {
                     <img src="./coverHome.svg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
                 </div>
             </div>
-
-            <a href="/dashboard">dashboard</a>
-            <h1>Homepage</h1>
         </div>
     )
 }

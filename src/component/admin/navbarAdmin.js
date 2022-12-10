@@ -1,8 +1,18 @@
 import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
 import http from "../../utils/http";
+import {useHistory} from 'react-router-dom'
 
 const NavbarAdmin = ({profile}) => {
+    const cookies = new Cookies()
+    const history = useHistory()
+
+    const logout = async () => {
+        await cookies.remove('token', {path: '/'})
+
+        history.push('/')
+    }
+
     return (
         <div>
             {/* Navbar */}
@@ -27,7 +37,9 @@ const NavbarAdmin = ({profile}) => {
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right mt-2">
-                        <span className="dropdown-item dropdown-header"><i className="fas fa-right-from-bracket mr-1" />Logout</span>
+                        <span className="dropdown-item dropdown-header" onClick={logout}><i className="fas fa-right-from-bracket mr-1" />
+                            Logout
+                        </span>
                     </div>
                 </li>
             </ul>
