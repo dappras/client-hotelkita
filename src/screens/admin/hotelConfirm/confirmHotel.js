@@ -118,7 +118,7 @@ const ConfirmHotel = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-lg-4">
+                                    <div className="col-lg-8">
                                         <div style={{ fontSize: 16}}>
                                             Description
                                         </div>
