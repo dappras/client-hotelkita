@@ -1,0 +1,18 @@
+    .hotel-name {
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    .hotel-address {
+        font-size: 16px;
+        opacity: 0.7;
+    }
+
+    .hotel-desc{
+        font-size: 16px;
+        opacity: 0.7;
+    }
+
+    .hotel-price {
+        font-size: 22px;
+    }

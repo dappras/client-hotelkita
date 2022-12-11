@@ -10,8 +10,10 @@ import MyHotel from './screens/admin/myHotel';
 import AddHotel from './screens/admin/myHotel/addHotel';
 import EditHotel from './screens/admin/myHotel/editHotel';
 import Profile from './screens/admin/profile';
+import DetailProduct from './screens/detail-product/detailProduct';
 import Home from './screens/home/Home';
 import Login from './screens/login';
+import Product from './screens/product/product';
 import SignUp from './screens/signup';
 
 function App() {
@@ -116,6 +118,22 @@ function App() {
         <Switch>
           <div className='wrapper'>
             <Route exact path="/dashboard/profile" component={Profile}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="product">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/product" component={Product}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="detail-product">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/product/:id" component={DetailProduct}>
             </Route>
           </div>
         </Switch>

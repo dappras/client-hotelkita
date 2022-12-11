@@ -47,7 +47,7 @@ const Navbar = ({active}) => {
         <div>
            <nav className="navbar navbar-expand-lg navbar-light bg-light mt-3 align-self-center">
                 <a className="navbar-brand mr-auto" href="/">
-                    <img src="./logoNavbar.svg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
+                    <img src='./logoNavbar.svg' style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
                 </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
@@ -84,14 +84,14 @@ const Navbar = ({active}) => {
                         }
                         {active==='product' && 
                             <li className="nav-item active mr-4">
-                                <a className="nav-link" href="/">
+                                <a className="nav-link" href="/product">
                                     Product <span className="sr-only">(current)</span>
                                 </a>
                             </li>
                         }
                         {active!=='product' && 
                             <li className="nav-item mr-4">
-                                <a className="nav-link" href="/">
+                                <a className="nav-link" href="/product">
                                     Product
                                 </a>
                             </li>
