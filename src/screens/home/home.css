@@ -1,3 +1,12 @@
+.card-facility {
+    border: none;
+    border-radius: 50px;
+}
+
+.card-facility .card-img-top {
+    border-radius: 12px;
+}
+
 @media only screen and (max-width: 768px) {
 }
 @media only screen and (min-width: 768px) and (max-width: 992px){

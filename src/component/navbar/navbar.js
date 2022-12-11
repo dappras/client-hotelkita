@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
 import {useHistory} from 'react-router-dom'
-import http from "../utils/http";
+import http from "../../utils/http";
 import { Link } from "react-router-dom";
 import './navbar.css'
 

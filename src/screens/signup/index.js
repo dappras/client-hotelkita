@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
-import Navbar from "../../component/navbar";
 import http from "../../utils/http";
 import './signup.css';
 import {useHistory} from 'react-router-dom'
