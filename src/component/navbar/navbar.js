@@ -47,7 +47,7 @@ const Navbar = ({active}) => {
         <div>
            <nav className="navbar navbar-expand-lg navbar-light bg-light mt-3 align-self-center">
                 <a className="navbar-brand mr-auto" href="/">
-                    <img src='./logoNavbar.svg' style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
+                    <img src={require('../../images/logoNavbar.png')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
                 </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
@@ -133,7 +133,7 @@ const Navbar = ({active}) => {
                              <li className="nav-item dropdown mt-0 login-button-desktop">
                                 <a className="nav-link" data-toggle="dropdown" href="#">
                                     <div style={{ width: 50, height:50 }}>
-                                        {dataProfile && dataProfile.imageUrl === undefined && <img src='./profilePicture.jpg' className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
+                                        {dataProfile && dataProfile.imageUrl === undefined && <img src={require('../../images/profilePicture.jpg')} className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
                                         {dataProfile && dataProfile.imageUrl && <img src={ dataProfile.imageUrl } className="nav-link" style={{ borderRadius: 100, width: '100%', height: '100%', objectFit: 'cover' }} data-toogle="drodpdown" alt="User Image" />}
                                     </div>
                                 </a>
