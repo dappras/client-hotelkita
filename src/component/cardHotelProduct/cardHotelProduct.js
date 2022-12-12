@@ -4,7 +4,7 @@ import './cardHotelProduct.css'
 const CardHotelProduct = ({data}) => {
     return(
         <div className="row align-items-center mt-4">
-            <div className="col-lg-3">
+            <div className="col-lg-3" style={{ height: '20vh' }}>
                 <img src={data.image[0]} style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} className='mb-2' alt="" />
             </div>
             <div className="col-lg-7">
