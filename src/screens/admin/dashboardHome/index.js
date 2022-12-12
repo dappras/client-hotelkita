@@ -34,8 +34,8 @@ const Dashboard = () => {
         <div>
             <NavbarAdmin profile={dataProfile} />
             <SidebarAdmin profile={dataProfile} />
-            <div className="container">
-                <h1 className="mt-5">Dashboard</h1>
+            <div className="content-wrapper">
+                <h3 className="mt-5 ml-3">Welcome to Dashboard</h3>
             </div>
         </div>
     )
