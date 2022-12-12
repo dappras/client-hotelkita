@@ -45,7 +45,7 @@ const Navbar = ({active}) => {
 
     return (
         <div>
-           <nav className="navbar navbar-expand-lg navbar-light bg-light mt-3 align-self-center">
+           <nav className="navbar navbar-expand-lg navbar-light mt-3 align-self-center" style={{ backgroundColor:'white' }}>
                 <a className="navbar-brand mr-auto" href="/">
                     <img src={require('../../images/logoNavbar.png')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
                 </a>

@@ -2536,6 +2536,9 @@ readers do not read off random characters that represent icons */
 .fa-list-ul:before {
   content: "\f0ca"; }
 
+.fa-location-dot:before {
+  content: "\f3c5"; }
+
 .fa-location-arrow:before {
   content: "\f124"; }
 
