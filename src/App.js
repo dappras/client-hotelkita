@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Booking from './screens/admin/booking';
+import BookingUser from './screens/booking/booking';
 import ConfirmBooking from './screens/admin/booking/confirmBooking';
 import Category from './screens/admin/category';
 import AddCategory from './screens/admin/category/addCategory';
@@ -16,6 +17,10 @@ import Login from './screens/login';
 import Payment from './screens/payment/payment';
 import Product from './screens/product/product';
 import SignUp from './screens/signup';
+import BookingOnPay from './screens/booking/bookingOnPay';
+import BookingOnBook from './screens/booking/bookingOnBook';
+import BookingHistory from './screens/booking/bookingHistory';
+import CategoryHotel from './screens/categoryHotel/categoryHotel';
 
 function App() {
   return (
@@ -143,6 +148,40 @@ function App() {
         <Switch>
           <div className='wrapper'>
             <Route exact path="/payment/:id" component={Payment}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="booking">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/booking/all" component={BookingUser}>
+            </Route>
+          </div>
+        </Switch>
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/booking/on-pay" component={BookingOnPay}>
+            </Route>
+          </div>
+        </Switch>
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/booking/on-book" component={BookingOnBook}>
+            </Route>
+          </div>
+        </Switch>
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/booking/history" component={BookingHistory}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="hotelByCategory">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/category/:id" component={CategoryHotel}>
             </Route>
           </div>
         </Switch>

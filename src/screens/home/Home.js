@@ -158,7 +158,9 @@ const Home = () => {
                         <div className="row mt-4">
                             {category.map((isi) => (
                                 <div className="col-lg-3 col-md-6 col-sm-6">
-                                    <CardCategory data={isi} />
+                                    <Link to={'/category/' + isi._id}>
+                                        <CardCategory data={isi} />
+                                    </Link>
                                 </div>
                             ))}
                         </div>

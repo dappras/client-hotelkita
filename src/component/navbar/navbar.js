@@ -70,14 +70,14 @@ const Navbar = ({active}) => {
                         }
                         {active==='booking' && 
                             <li className="nav-item active mr-4">
-                                <a className="nav-link" href="/">
+                                <a className="nav-link" href="/booking/all">
                                     Booking <span className="sr-only">(current)</span>
                                 </a>
                             </li>
                         }
                         {active!=='booking' && 
                             <li className="nav-item mr-4">
-                                <a className="nav-link" href="/">
+                                <a className="nav-link" href="/booking/all">
                                     Booking
                                 </a>
                             </li>
