@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../component/navbar/navbar";
 import http from "../../utils/http";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import './detailProduct.css'
 import CardHotel from "../../component/cardHotel/cardHotel";
+import Cookies from "universal-cookie";
 
 const DetailProduct = () => {
     const {id} = useParams()
+    const cookies = new Cookies()
+    const history = useHistory()
 
     const [detailHotel, setDetailHotel] = useState()
     const [availableDate, setAvailableDate] = useState()
     const [latestHotel, setLatestHotel] = useState()
+    const [selectDate, setSelectDate] = useState()
+    const [hasLoginUser, setHasLoginUser] = useState(false)
 
     const fasilitas = [
         {
@@ -48,6 +53,10 @@ const DetailProduct = () => {
     ]
 
     const initState = async () => {
+        if (cookies.get('token') !== undefined) {
+            setHasLoginUser(true)   
+        }
+
         const body = {
             id: id
         }
@@ -99,6 +108,31 @@ const DetailProduct = () => {
         initState()
     }, [])
 
+    const handleBook = async () => {
+        const hasil = {}
+        availableDate.forEach(item => {
+            if (item.date==selectDate) {
+                hasil.bookingDate = item.date
+                hasil.bookingMonth = item.month
+                hasil.bookingYear = item.year
+                hasil.total = detailHotel.price;
+                hasil.hotelId = id
+            }
+        });
+
+        console.log(hasil);
+
+        await http.post('/booking', hasil).then((res) => {
+            if(res.data.success) {
+                history.push('/payment/' + res.data.data._id)
+            } else {
+                console.log('failed fetching data');
+            }
+        }).then((e) => {
+            console.log(e);
+        })
+    }
+
     return(
         <div className="container">
             <Navbar active={'product'} />
@@ -116,9 +150,16 @@ const DetailProduct = () => {
                         </div>
                         <div className="col-2">
                             <div className="d-flex justify-content-end">
-                                <button type="button" className="btn px-4 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ backgroundColor: '#01BDE1', color: 'white' }}>
-                                    Book Now
-                                </button>
+                                {hasLoginUser && (
+                                    <button type="button" className="btn px-4 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ backgroundColor: '#01BDE1', color: 'white' }}>
+                                        Book Now
+                                    </button>
+                                )}
+                                {!hasLoginUser && (
+                                    <button type="button" className="btn px-4 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" style={{ backgroundColor: '#01BDE1', color: 'white' }}>
+                                        Book Now
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -155,11 +196,6 @@ const DetailProduct = () => {
                                     </div>
                                 )
                             })}
-                            {/* {detailHotel.image.length <=0 && (
-                                <div className="carousel-item active">
-                                    <img className="d-block w-100" src={isi.imageUrl} alt="First slide" />
-                                </div>
-                            )} */}
                         </div>
                         <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -307,16 +343,48 @@ const DetailProduct = () => {
                 <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
-                            <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                            <div class="modal-header">
+                                <h5 class="modal-title">Choose Available Date</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                            ...
+                                <div className="row justify-content-center">
+                                    {availableDate && availableDate.map((isi, index) => (
+                                        <div className="col-lg-2 mr-5">
+                                            <div className="btn-group" role="group" style={{ overflow:'auto' }}>
+                                                <input type="radio" className="btn-check" name="option" id={`option-${index}`} defaultValue={isi.date} onChange={(e) => setSelectDate(e.target.value)} />
+                                                <label className="btn btn-outline-primary" style={{border: 'none'}} htmlFor={`option-${index}`} >
+                                                    <div className="tanggal">{`${isi.date}/${isi.month}/${isi.year}`}</div>
+                                                    <div className="room">{isi.availableRoom} Room</div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                             <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                            <button type="button" className="btn" style={{ backgroundColor: '#01BDE1' }} data-bs-dismiss="modal" onClick={handleBook}>Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                {/* Modal */}
+                <div className="modal fade" id="exampleModal2" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Alert</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <h4>You have to login first!!!!</h4>
+                            </div>
+                            <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

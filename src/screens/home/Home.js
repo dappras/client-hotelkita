@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import CardCategory from "../../component/cardCategory/cardCategory";
 import CardHotel from "../../component/cardHotel/cardHotel";
@@ -106,7 +107,9 @@ const Home = () => {
                         <div className="row mt-4">
                             {latestHotel.map((isi) => (
                                 <div className="col-lg-3 col-md-6 col-sm-6">
-                                    <CardHotel data={isi} />
+                                    <Link to={'/product/' + isi._id} style={{ textDecoration: 'none', color: 'black' }}>
+                                        <CardHotel data={isi} />
+                                    </Link>
                                 </div>
                             ))}
                         </div>

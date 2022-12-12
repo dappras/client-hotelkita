@@ -13,6 +13,7 @@ import Profile from './screens/admin/profile';
 import DetailProduct from './screens/detail-product/detailProduct';
 import Home from './screens/home/Home';
 import Login from './screens/login';
+import Payment from './screens/payment/payment';
 import Product from './screens/product/product';
 import SignUp from './screens/signup';
 
@@ -134,6 +135,14 @@ function App() {
         <Switch>
           <div className='wrapper'>
             <Route exact path="/product/:id" component={DetailProduct}>
+            </Route>
+          </div>
+        </Switch>
+      </div>
+      <div className="detail-product">
+        <Switch>
+          <div className='wrapper'>
+            <Route exact path="/payment/:id" component={Payment}>
             </Route>
           </div>
         </Switch>
