@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Footer from "../../component/footer/footer";
 import Navbar from "../../component/navbar/navbar";
@@ -12,10 +12,48 @@ const Payment = () => {
     const [nameBank, setNameBank] = useState()
     const [nomorRekening, setNomorRekening] = useState()
 
+    const [bankHotel, setBankHotel] = useState()
+
     const [base64, setBase64] = useState()
     const [imageFile, setImageFile] = useState()
 
     const [formFull, setFormFull] = useState(false)
+
+    const initState = async () => {
+        await http.post('/get-user-booking').then(async (res) => {
+            if(res.data.success) {
+                let hotelId = ''
+                await res.data.data.forEach(element => {
+                    if(element.booking._id == id) {
+                        hotelId = element.booking.hotelId
+                    }
+                });
+                const body = {
+                    hotelId: hotelId
+                }
+                console.log(body);
+                console.log(res.data.data.booking);
+                await http.post('/get-bank-hotel', body).then(resBank => {
+                    if(resBank.data.success) {
+                        setBankHotel(resBank.data.data)
+                        console.log(resBank.data.data);
+                    } else {
+                        console.log('failed fetch data bank hotel!!!');
+                    }
+                }).catch(e => {
+                    console.log(e);
+                })
+            } else {
+                console.log('failed fetch data user booking!!');
+            }
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
+    useEffect(() => {
+        initState()
+    }, [])
 
     const getBase64 = file => {
         return new Promise(resolve => {
@@ -93,7 +131,7 @@ const Payment = () => {
             <div className="row">
                 <div className="col-lg-12 row justify-content-center align-items-center" style={{ height: '89vh' }}>
                     <div className="row justify-content-center" style={{ backgroundColor: 'white' }}>
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             {formFull && (
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <strong>Please fill the form!!</strong>
@@ -106,21 +144,40 @@ const Payment = () => {
                                         Upload Proof Payment
                                     </div>
                                 </div>
-                                <div className="col-lg-3">
-                                    <div className="row">
-                                        {imageFile && (
-                                            <div className="col-lg-12">
-                                                <div style={{ height: '20vh' }}>
-                                                    <img src={URL.createObjectURL(imageFile)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
+                                {bankHotel && (
+                                    <div className="col-lg-4 d-flex">
+                                        <div className="row">
+                                            <div className="col-lg-12 mb-3 d-flex justify-content-center" style={{ fontSize: 20, fontWeight: 500 }}>
+                                                Transfer to This Bank
+                                            </div>
+                                            <div className="col-lg-12 mb-2 mt-3 d-flex align-items-center" style={{ flexDirection: 'column' }}>
+                                                <div className="mb-2" style={{ fontWeight: 500 }}>
+                                                    Name Bank
+                                                </div>
+                                                <div>
+                                                    {bankHotel.nameBank}
                                                 </div>
                                             </div>
-                                        )}
-                                        <div className="col-lg-12 mt-3">
-                                            <input type="file" accept=".png, .jpg, .jpeg" className="form-control-file" id="exampleFormControlFile1"  onChange={handleFileInputChange} required />
+                                            <div className="col-lg-12 mb-2 d-flex align-items-center" style={{ flexDirection: 'column' }}>
+                                                <div className="mb-2" style={{ fontWeight: 500 }}>
+                                                    Name Account Bank
+                                                </div>
+                                                <div>
+                                                    {bankHotel.nameAccountBank}
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-12 d-flex align-items-center" style={{ flexDirection: 'column' }}>
+                                                <div className="mb-2" style={{ fontWeight: 500 }}>
+                                                    Nomor Rekening
+                                                </div>
+                                                <div>
+                                                    {bankHotel.nomorRekening}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-lg-7">
+                                )}
+                                <div className="col-lg-5">
                                     <div className="form-group">
                                         <label>Name Account Bank</label>
                                         <input type="text" className="form-control" placeholder="ex: Ujang Surajang" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -141,6 +198,20 @@ const Payment = () => {
                                     </a>
                                     <div className="btn mt-2" style={{ backgroundColor: '#01BDE1', color: 'white' }} onClick={submitForm}>
                                         Pay Now
+                                    </div>
+                                </div>
+                                <div className="col-lg-3">
+                                    <div className="row">
+                                        {imageFile && (
+                                            <div className="col-lg-12">
+                                                <div style={{ height: '20vh' }}>
+                                                    <img src={URL.createObjectURL(imageFile)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="" />
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="col-lg-12 mt-3">
+                                            <input type="file" accept=".png, .jpg, .jpeg" className="form-control-file" id="exampleFormControlFile1"  onChange={handleFileInputChange} required />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
