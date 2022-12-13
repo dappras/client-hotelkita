@@ -367,7 +367,7 @@ const DetailProduct = () => {
                             </div>
                             <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn" style={{ backgroundColor: '#01BDE1' }} data-bs-dismiss="modal" onClick={handleBook}>Save changes</button>
+                            <button type="button" className="btn" style={{ backgroundColor: '#01BDE1' }} data-bs-dismiss="modal" onClick={handleBook}>Book Now</button>
                             </div>
                         </div>
                     </div>
