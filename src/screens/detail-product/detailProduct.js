@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../component/navbar/navbar";
 import http from "../../utils/http";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import './detailProduct.css'
 import CardHotel from "../../component/cardHotel/cardHotel";
 import Cookies from "universal-cookie";
@@ -330,7 +330,9 @@ const DetailProduct = () => {
                         <div className="row mt-4">
                             {latestHotel.map((isi) => (
                                 <div className="col-lg-3 col-md-6 col-sm-6">
-                                    <CardHotel data={isi} />
+                                    <a href={'/product/' + isi._id} style={{ textDecoration: 'none', color: 'black' }}>
+                                        <CardHotel data={isi} />
+                                    </a>
                                 </div>
                             ))}
                         </div>
