@@ -3,6 +3,7 @@ import CardHotelProduct from "../../component/cardHotelProduct/cardHotelProduct"
 import Navbar from "../../component/navbar/navbar";
 import http from "../../utils/http";
 import { Link, useParams } from "react-router-dom";
+import Footer from "../../component/footer/footer";
 
 const CategoryHotel = () => {
     const {id} = useParams()
@@ -71,6 +72,8 @@ const CategoryHotel = () => {
                     </div>
                 )}
             </div>
+
+            <Footer />
         </div>
     )
 }

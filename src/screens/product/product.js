@@ -3,6 +3,7 @@ import CardHotelProduct from "../../component/cardHotelProduct/cardHotelProduct"
 import Navbar from "../../component/navbar/navbar";
 import http from "../../utils/http";
 import { Link } from "react-router-dom";
+import Footer from "../../component/footer/footer";
 
 const Product = () => {
     
@@ -66,6 +67,8 @@ const Product = () => {
                     </div>
                 )}
             </div>
+
+            <Footer />
         </div>
     )
 }

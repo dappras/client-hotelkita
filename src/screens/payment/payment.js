@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import Footer from "../../component/footer/footer";
 import Navbar from "../../component/navbar/navbar";
 import http from "../../utils/http";
 
@@ -132,9 +133,14 @@ const Payment = () => {
                                         <label>Nomor Rekening</label>
                                         <input type="text" className="form-control" placeholder="ex: 0213123421" value={nomorRekening} onChange={(e) => setNomorRekening(e.target.value)} required />
                                     </div>
-
+                                    
+                                    <a href="/booking/all">
+                                        <div className="btn mt-2 mr-3 btn-secondary">
+                                            Pay Later
+                                        </div>
+                                    </a>
                                     <div className="btn mt-2" style={{ backgroundColor: '#01BDE1', color: 'white' }} onClick={submitForm}>
-                                        Submit
+                                        Pay Now
                                     </div>
                                 </div>
                             </div>
@@ -142,6 +148,9 @@ const Payment = () => {
                     </div>
                 </div>
             </div>
+
+            <Footer />
+
         </div>
     )
 }

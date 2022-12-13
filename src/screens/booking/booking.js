@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardBooking from "../../component/cardBooking/cardBooking";
+import Footer from "../../component/footer/footer";
 import Navbar from "../../component/navbar/navbar";
 import NavbarBooking from "../../component/navbarBooking/navbarBooking";
 import http from "../../utils/http";
@@ -32,12 +33,14 @@ const Booking = () => {
             <NavbarBooking active={'all'} />
 
             <div className="row mt-4 mb-5">
-                <div className="col-lg-12">
+                <div className="col-lg-12 mb-5">
                     {booking && booking.map((isi) => (
                         <CardBooking data={isi} />
                     ))}
                 </div>
             </div>
+
+            <Footer />
         </div>
     )
 }   

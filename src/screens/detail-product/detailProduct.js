@@ -5,6 +5,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import './detailProduct.css'
 import CardHotel from "../../component/cardHotel/cardHotel";
 import Cookies from "universal-cookie";
+import Footer from "../../component/footer/footer";
 
 const DetailProduct = () => {
     const {id} = useParams()
@@ -392,6 +393,8 @@ const DetailProduct = () => {
                     </div>
                 </div>
             </div>
+
+            <Footer />
 
         </div>
     )

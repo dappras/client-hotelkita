@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import CardCategory from "../../component/cardCategory/cardCategory";
 import CardHotel from "../../component/cardHotel/cardHotel";
+import Footer from "../../component/footer/footer";
 import Navbar from "../../component/navbar/navbar";
 import http from "../../utils/http";
 import './home.css'
@@ -146,7 +147,7 @@ const Home = () => {
                 </div>
 
                 {/* City/category */}
-                <div className="col-lg-12 mt-4">
+                <div className="col-lg-12 mt-4 mb-5">
                     <div className="row justify-content-center mt-4 mb-2" style={{ fontSize: 22, fontWeight: 500 }}>
                         Pilihan tempat populer untuk liburanmu
                     </div>
@@ -167,6 +168,8 @@ const Home = () => {
                     )}
                 </div>
             </div>
+
+            <Footer />
         </div>
     )
 }
