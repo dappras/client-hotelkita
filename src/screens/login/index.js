@@ -85,7 +85,7 @@ const Login = () => {
                             </div>
 
                             <div className="d-flex justify-content-center mt-5">
-                                <div style={{ backgroundColor: '#01BDE1', display: 'inline-block', borderRadius: 50, paddingLeft: 80, paddingRight: 80, color: 'white', paddingTop: 12, paddingBottom: 12 }} onClick={submitForm}>
+                                <div className="button-sign" style={{ backgroundColor: '#01BDE1', display: 'inline-block', borderRadius: 50, paddingLeft: 80, paddingRight: 80, color: 'white', paddingTop: 12, paddingBottom: 12 }} onClick={submitForm}>
                                     SIGN IN
                                 </div>
                             </div>
