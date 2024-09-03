@@ -1,14 +1,14 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-const cookies = new Cookies()
+const cookies = new Cookies();
 
 const http = axios.create({
-    baseURL: 'http://103.226.139.23:3000/api',
-    headers: {
-        "Content-Type": "application/json",
-        "auth-token": cookies.get('token'),
-    },
-})
+  baseURL: `${process.env.REACT_APP_API_URL}api`,
+  headers: {
+    "Content-Type": "application/json",
+    "auth-token": cookies.get("token"),
+  },
+});
 
-export default http
+export default http;
